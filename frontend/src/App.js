@@ -97,8 +97,9 @@ function App() {
   const handlePredict = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/predict', answers);
-      setResult(res.data.result);
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        const res = await axios.post(`${apiUrl}/predict`, answers);
+        setResult(res.data.result);
     } catch (error) {
       console.error('Error predicting result:', error);
     } finally {
